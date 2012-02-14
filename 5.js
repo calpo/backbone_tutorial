@@ -54,7 +54,8 @@
 	var ListView = Backbone.View.extend({
 		el: $('body'),
 		events: {
-			'click button#add': 'addItem'
+			'click button#add': 'addItem',
+			'click button#show': 'showItems'
 		},
 		initialize: function(){
 			_.bindAll(this, 'render', 'addItem', 'appendItem');
@@ -69,6 +70,7 @@
 			console.log('ListView::render()');
 			var self = this;
 			$(this.el).append('<button id="add">リストにアイテム追加</button>');
+			$(this.el).append('<button id="show">コレクション確認</button>');
 			$(this.el).append('<ul></ul>');
 			_(this.collection.models).each(function(item){
 				console.log('ListView::render() -> each() '+ item.get('part2'));
@@ -83,6 +85,9 @@
 				part2: item.get('part2') + this.counter
 			});
 			this.collection.add(item);
+		},
+		showItems: function(){
+			console.log(JSON.stringify(this.collection));
 		},
 		appendItem: function(item){
 			console.log('ListView::appendItem() '+ item.get('part2'));
