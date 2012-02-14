@@ -19,13 +19,10 @@
 		tagName: 'li',
 		events: {
 			'click span.swap': 'swap',
-			'click span.delete': 'remove',
-			'click span.show': 'show'
+			'click span.delete': 'remove'
 		},
 		initialize: function(){
 			_.bindAll(this, 'render', 'unrender', 'swap', 'remove');
-
-			this.collection = new List();
 
 			this.model.bind('change', this.render);
 			this.model.bind('remove', this.unrender);
@@ -35,8 +32,7 @@
 			$(this.el).html(
 				'<span>'+ this.model.get('part1') +' '+ this.model.get('part2') +'</span> '+
 				'<span class="swap" style="color:blue; cursor:pointer;">[swap]</span> '+
-				'<span class="delete" style="color:red; cursor:pointer;">[delete]</span> '+
-				'<span class="show" style="color:brown; cursor:pointer;">[show]</span> '
+				'<span class="delete" style="color:red; cursor:pointer;">[delete]</span> '
 			);
 			return this;
 		},
@@ -52,9 +48,6 @@
 		},
 		remove: function(){
 			this.model.destroy();
-		},
-		show: function(){
-			console.log(this.collection.models);
 		}
 	});
 
